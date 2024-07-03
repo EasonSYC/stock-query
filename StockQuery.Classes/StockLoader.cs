@@ -60,7 +60,7 @@ public class StockLoader(string baseUrl, string apiKey)
         return result;
     }
 
-        public async Task<List<StockResult>> LoadStockMarketAsync(string exchange)
+    public async Task<List<StockResult>> LoadStockMarketAsync(string exchange)
     {
         string newBaseUrl = _baseUrl + "/stock/symbol";
         UriBuilder uriBuilder = new(newBaseUrl);

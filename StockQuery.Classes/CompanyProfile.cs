@@ -3,41 +3,41 @@ using System.Text.Json.Serialization;
 
 namespace StockQuery.Classes;
 
-public class CompanyProfile
+public record CompanyProfile
 {
     [JsonPropertyName("country")]
     public string Country { get; set; } = string.Empty;
 
     [JsonPropertyName("currency")]
     public string Currency { get; set; } = string.Empty;
-    
+
     [JsonPropertyName("exchange")]
     public string Exchange { get; set; } = string.Empty;
-    
+
     [JsonPropertyName("finnhubindustry")]
     public string FinnHubIndustry { get; set; } = string.Empty;
-    
+
     [JsonPropertyName("name")]
     public string CompanyName { get; set; } = string.Empty;
-    
+
     [JsonPropertyName("phone")]
     public string CompanyPhone { get; set; } = string.Empty;
-    
+
     [JsonPropertyName("ticker")]
     public string Ticker { get; set; } = string.Empty;
 
     [JsonPropertyName("marketCapitalization")]
     public decimal MarketCapitalization { get; set; } = -1;
-    
+
     [JsonPropertyName("shareOutstanding")]
     public decimal ShareOutstanding { get; set; } = -1;
-    
+
     [JsonPropertyName("ipo")]
     public DateOnly IpoDate { get; set; } = new();
-    
+
     [JsonPropertyName("logo")]
     public string Logo { get; set; } = string.Empty;
-    
+
     [JsonPropertyName("weburl")]
     public string WebUrl { get; set; } = string.Empty;
 

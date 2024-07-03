@@ -2,7 +2,7 @@
 
 namespace StockQuery.Classes;
 
-public class SymbolQueryResult
+public record SymbolQueryResult
 {
     [JsonPropertyName("count")]
     public int Count { get; set; } = 0;

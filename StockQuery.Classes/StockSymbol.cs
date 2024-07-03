@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace StockQuery.Classes;
 
-public class StockSymbol
+public record StockSymbol
 {
     [JsonPropertyName("description")]
     public string Description { get; set; } = string.Empty;

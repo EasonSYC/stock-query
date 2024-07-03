@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace StockQuery.Classes;
 
-public class QuoteData
+public record QuoteData
 {
     [JsonPropertyName("c")]
     public decimal CurrentPrice { get; set; } = -1;

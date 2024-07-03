@@ -3,35 +3,35 @@ using System.Text.Json.Serialization;
 
 namespace StockQuery.Classes;
 
-public class StockResult
+public record StockResult
 {
     [JsonPropertyName("currency")]
     public string Currency { get; set; } = string.Empty;
 
     [JsonPropertyName("description")]
     public string Description { get; set; } = string.Empty;
-    
+
     [JsonPropertyName("displaySymbol")]
     public string DisplaySymbol { get; set; } = string.Empty;
-    
+
     [JsonPropertyName("symbol")]
     public string Symbol { get; set; } = string.Empty;
-    
+
     [JsonPropertyName("symbol2")]
     public string Symbol2 { get; set; } = string.Empty;
-    
+
     [JsonPropertyName("type")]
     public string Type { get; set; } = string.Empty;
-    
+
     [JsonPropertyName("isin")]
     public string Isin { get; set; } = string.Empty;
-    
+
     [JsonPropertyName("figi")]
     public string Figi { get; set; } = string.Empty;
-    
+
     [JsonPropertyName("shareClassFIGI")]
     public string ShareClassFigi { get; set; } = string.Empty;
-    
+
     [JsonPropertyName("mic")]
     public string Mic { get; set; } = string.Empty;
 
