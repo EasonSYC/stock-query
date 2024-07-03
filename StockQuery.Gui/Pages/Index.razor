@@ -1,0 +1,115 @@
+﻿@using StockQuery.Classes;
+@inject StockLoader loader;
+
+@page "/"
+
+<h1>Stock Query Webpage</h1>
+
+<h2>Stock Symbol Query</h2>
+
+<div class="container">
+    <div class="input padding-md">
+        <div class="width-md"><label for="stockSymbol">Stock Symbol: </label></div>
+        <input class="fnt padding-xs" type="text" name="stockSymbol" id="stockSymbol" @bind="stockSymbol" />
+    </div>
+
+    <div class="padding-md"><button class="fnt padding-sm" type="submit" disabled="@SymbolInputInvalid()"
+            @onclick="@OnQuoteAsync">Query Quote Data</button></div>
+
+    <div class="padding-md"><button class="fnt padding-sm" type="submit" disabled="@SymbolInputInvalid()"
+            @onclick="@OnProfileAsync">Query Company Profile</button></div>
+
+    <div class="padding-md"><button class="fnt padding-sm" type="submit" disabled="@SymbolInputInvalid()"
+            @onclick="@OnSymbolAsync">Query Both</button></div>
+
+    @if (!string.IsNullOrWhiteSpace(quoteResult))
+    {
+        <h3>Quote Result for @stockSymbol</h3>
+        <div class="left-pd" style="white-space: pre-wrap">
+            @quoteResult
+        </div>
+    }
+
+    @if (!string.IsNullOrWhiteSpace(profileResult))
+    {
+        <h3>Profile Result for @stockSymbol</h3>
+        <div class="left-pd" style="white-space: pre-wrap">
+            @profileResult
+        </div>
+    }
+
+    @if (!string.IsNullOrWhiteSpace(symbolErrorResult))
+    {
+        <div class="left-pd" style="white-space: pre-wrap">
+            @symbolErrorResult
+        </div>
+    }
+</div>
+
+@code {
+
+    string baseApi = string.Empty;
+    string apiKey = string.Empty;
+
+    string stockSymbol = string.Empty;
+    string quoteResult = string.Empty;
+    string profileResult = string.Empty;
+    string symbolErrorResult = string.Empty;
+
+    protected bool SymbolInputInvalid()
+    {
+        return string.IsNullOrWhiteSpace(stockSymbol);
+    }
+
+    protected async Task OnQuoteAsync(MouseEventArgs mouseEventArgs)
+    {
+        try
+        {
+            QuoteData quoteData = await loader.LoadQuoteAsync(stockSymbol);
+            quoteResult = quoteData.ToString();
+            profileResult = string.Empty;
+            symbolErrorResult = string.Empty;
+        }
+        catch (Exception e)
+        {
+            quoteResult = string.Empty;
+            profileResult = string.Empty;
+            symbolErrorResult = e.Message;
+        }
+    }
+
+    protected async Task OnProfileAsync(MouseEventArgs mouseEventArgs)
+    {
+        try
+        {
+            CompanyProfile companyProfile = await loader.LoadCompanyProfileAsync(stockSymbol);
+            quoteResult = string.Empty;
+            profileResult = companyProfile.ToString();
+            symbolErrorResult = string.Empty;
+        }
+        catch (Exception e)
+        {
+            quoteResult = string.Empty;
+            profileResult = string.Empty;
+            symbolErrorResult = e.Message;
+        }
+    }
+
+    protected async Task OnSymbolAsync(MouseEventArgs mouseEventArgs)
+    {
+        try
+        {
+            QuoteData quoteData = await loader.LoadQuoteAsync(stockSymbol);
+            CompanyProfile companyProfile = await loader.LoadCompanyProfileAsync(stockSymbol);
+            quoteResult = quoteData.ToString();
+            profileResult = companyProfile.ToString();
+            symbolErrorResult = string.Empty;
+        }
+        catch (Exception e)
+        {
+            quoteResult = string.Empty;
+            profileResult = string.Empty;
+            symbolErrorResult = e.Message;
+        }
+    }
+}
